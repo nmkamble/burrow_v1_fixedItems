@@ -32,10 +32,11 @@ export default async function ItemDetailPage({
       `
       *,
       categories(name, slug),
-      profiles:owner_id(display_name, university)
+      profiles!inner(display_name, university)
     `
     )
     .eq("id", id)
+    .eq("profiles.id", "owner_id")
     .single();
 
   if (!item) {
